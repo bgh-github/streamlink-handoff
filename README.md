@@ -73,7 +73,7 @@ If curious, you're encouraged to inspect the commands before running them.
   cat > $host_dir/$host_program << 'EOF'
   #!/bin/bash
 
-  if [ $STREAMLINK_HANDOFF_HOST_LOGGING = 1 ]
+  if [ $STREAMLINK_HANDOFF_HOST_LOG = 1 ]
   then
     exec >> /tmp/"$(date --iso-8601)"_streamlink-handoff-host.log 2>&1
     set -o xtrace
@@ -128,7 +128,7 @@ If curious, you're encouraged to inspect the commands before running them.
   Set-Content -Path (Join-Path -Path $HostFolderPath -ChildPath $HostProgram) -Value $BatchFileContent -Force
 
   $PSFileContent = @'
-  If ($Env:STREAMLINK_HANDOFF_HOST_LOGGING -Eq 1)
+  If ($Env:STREAMLINK_HANDOFF_HOST_LOG -Eq 1)
   {
       Start-Transcript -Path (Join-Path -Path $Env:Temp -ChildPath ((Get-Date -Format yyyy-MM-dd) + "_streamlink-handoff-host.log")) -IncludeInvocationHeader -Append
       Get-Date
@@ -164,7 +164,7 @@ If Firefox is open in Private Browsing mode, Streamlink Handoff must be [allowed
 
 You can try rerunning the first time [native messaging host setup](#first-time-setup) for your platform to reapply configuration.
 
-The Streamlink Handoff native messaging host configurations provided above will also log their execution if an environment variable `STREAMLINK_HANDOFF_HOST_LOGGING=1` is set. Log files are output to `/tmp` on Linux and `%TEMP%` on Windows.
+The Streamlink Handoff native messaging host configurations provided above will also log their execution if an environment variable `STREAMLINK_HANDOFF_HOST_LOG=1` is set. Log files are output to `/tmp` on Linux and `%TEMP%` on Windows.
 
 ## Motivation
 
