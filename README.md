@@ -52,43 +52,43 @@ If curious, you're encouraged to inspect the commands before running them.
   This should create two Streamlink Handoff files (.json and .sh) under `$HOME/.mozilla/native-messaging-hosts`.
 
   ```bash
-    host_dir=$HOME/.mozilla/native-messaging-hosts
-    mkdir --parents $host_dir
+  host_dir=$HOME/.mozilla/native-messaging-hosts
+  mkdir --parents $host_dir
 
-    host_name=streamlink_handoff_host
-    host_program=streamlink-handoff.sh
+  host_name=streamlink_handoff_host
+  host_program=streamlink-handoff.sh
 
-    # manifest
-    cat > $host_dir/$host_name.json << EOF
-    {
-      "name": "$host_name",
-      "description": "Streamlink Handoff Native Messaging Host - Linux",
-      "path": "$host_dir/$host_program",
-      "type": "stdio",
-      "allowed_extensions": ["streamlink-handoff@bgh.io"]
-    }
-    EOF
+  # manifest
+  cat > $host_dir/$host_name.json << EOF
+  {
+    "name": "$host_name",
+    "description": "Streamlink Handoff Native Messaging Host - Linux",
+    "path": "$host_dir/$host_program",
+    "type": "stdio",
+    "allowed_extensions": ["streamlink-handoff@bgh.io"]
+  }
+  EOF
 
-    # host program
-    cat > $host_dir/$host_program << 'EOF'
-    #!/bin/bash
+  # host program
+  cat > $host_dir/$host_program << 'EOF'
+  #!/bin/bash
 
-    if [ $STREAMLINK_HANDOFF_HOST_LOGGING = 1 ]
-    then
-      exec >> /tmp/"$(date --iso-8601)"_streamlink-handoff-host.log 2>&1
-      set -o xtrace
-      date
-    fi
+  if [ $STREAMLINK_HANDOFF_HOST_LOGGING = 1 ]
+  then
+    exec >> /tmp/"$(date --iso-8601)"_streamlink-handoff-host.log 2>&1
+    set -o xtrace
+    date
+  fi
 
-    message_byte_length=$(od --address-radix=n --read-bytes=4 --format=dL | tr --delete " ")
+  message_byte_length=$(od --address-radix=n --read-bytes=4 --format=dL | tr --delete " ")
 
-    message=$(od --address-radix=n --read-bytes="$message_byte_length" --format=x1 | xxd --plain --revert)
-    message=$(echo $message | sed --expression='s/^"//' --expression='s/"$//')
+  message=$(od --address-radix=n --read-bytes="$message_byte_length" --format=x1 | xxd --plain --revert)
+  message=$(echo $message | sed --expression='s/^"//' --expression='s/"$//')
 
-    streamlink $message
-    EOF
+  streamlink $message
+  EOF
 
-    chmod u+x $host_dir/$host_program
+  chmod u+x $host_dir/$host_program
   ```
 </details>
 
