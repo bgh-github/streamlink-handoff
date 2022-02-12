@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Streamlink Handoff Preferences</title>
+    <style>form label {display: block; padding-bottom: 4px;} a {padding-top: 15px;}</style>
+  </head>
+  <body>
+    <form>
+      <label>Player 
+        <select name="Player" id="player">
+          <option value="">Streamlink default</option>
+          <option value="vlc">VLC media player</option>
+          <option value="mpv">mpv</option>
+        </select>
+      </label>
+      <label>Player arguments <input type="text" id="playerArgs"></label>
+      <label>Quality <input type="text" id="quality" placeholder="best"></label>
+      <button type="submit">Save</button>
+      <input type="reset">
+    </form>
+    <a href="https://streamlink.github.io/cli.html">Streamlink command line reference &#128279;</a>
+    <script src="options.js"></script>
+  </body>
+</html>

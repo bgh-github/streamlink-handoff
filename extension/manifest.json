@@ -1,0 +1,11 @@
+{
+  "manifest_version": 2,
+  "name": "Streamlink Handoff",
+  "version": "1.0",
+  "description": "Pass video URLs to Streamlink for playback",
+  "icons": {"48": "icon.svg", "96": "icon.svg"},
+  "background": {"scripts": ["background.js"]},
+  "permissions": ["menus", "nativeMessaging", "storage"],
+  "browser_specific_settings":{"gecko": {"id": "streamlink-handoff@bgh.io"}},
+  "options_ui": {"page": "options.html"} 
+}
