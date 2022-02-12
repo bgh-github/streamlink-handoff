@@ -32,7 +32,7 @@ Absolutely no data is collected by this extension.
 
 The so-called 'native messaging host' is the local app/program/binary that interfaces with the browser extension.
 
-For Streamlink Handoff, a major goal here was to create the most generic and simple reference implementations possible, with little to no external dependencies.
+For Streamlink Handoff, a major goal here was to create the most generic and minimal reference implementations possible, with little to no external dependencies.
 
 On Linux this is acheieved through a Bash shell script, and on Windows a PowerShell script called via a Batch file wrapper.
 
