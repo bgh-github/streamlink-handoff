@@ -156,7 +156,7 @@ If curious, you're encouraged to inspect the commands before running them.
 
 Review [requirements](#requirements). Though not specifically mentioned, it's assumed relatively recent versions of the following are installed
 
-* Firefox
+* Firefox (for desktop)
 * On Linux - core utilities, namely `od` and `xxd`
 * On Windows - testing occurs against Windows PowerShell 5.1 ([installed by default](https://docs.microsoft.com/powershell/scripting/windows-powershell/install/windows-powershell-system-requirements#windows-powershell-51) on Windows 10+)
 
