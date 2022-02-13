@@ -1,5 +1,7 @@
 # Streamlink Handoff
 
+> :exclamation: This extension is experimental. Issues with the extension on Windows are currently being worked through 
+
 Streamlink Handoff is a Firefox browser companion extension for [Streamlink](https://streamlink.github.io). The extension adds a context menu (right-click) option, providing a way to conveniently pass supported video URLs to Streamlink for playback.
 
 Available from [addons.mozilla.org](https://addons.mozilla.org/firefox/addon/streamlink-handoff/)
