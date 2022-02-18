@@ -1,35 +1,38 @@
-const options = ["player", "playerArgs", "quality"];
+const options = ["player", "otherArgs", "quality"];
 
 function restoreOptions()
 {
   options.forEach(optionKey => 
+  {
+    browser.storage.local.get(optionKey)
+    .then(storageItem =>
     {
-      browser.storage.local.get(optionKey)
-        .then(storageItem =>
-        {
-          if (storageItem[optionKey]){document.querySelector("#"+optionKey).value = storageItem[optionKey]};
-        })
+      if (storageItem[optionKey])
+      {
+        document.querySelector("#"+optionKey).value = storageItem[optionKey];
+      }
     });
-};
+  });
+}
 
 function saveOptions(event)
 {
   event.preventDefault();
   
   options.forEach(optionKey =>
+  {
+    let optionValue = document.querySelector("#"+optionKey).value;
+    
+    if (optionValue)
     {
-      let optionValue = document.querySelector("#"+optionKey).value;
-      
-      if (optionValue)
-      {
-        browser.storage.local.set({[optionKey]: optionValue});
-      }
-      else
-      {
-        browser.storage.local.remove(optionKey);
-      }
-    });
-};
+      browser.storage.local.set({[optionKey]: optionValue});
+    }
+    else
+    {
+      browser.storage.local.remove(optionKey);
+    }
+  });
+}
 
 function resetOptions(event)
 {
@@ -43,7 +46,7 @@ function resetOptions(event)
   {
     event.preventDefault();
   }
-};
+}
 
 document.addEventListener("DOMContentLoaded", restoreOptions);
 document.querySelector("form").addEventListener("submit", saveOptions);

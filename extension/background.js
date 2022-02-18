@@ -20,28 +20,29 @@ browser.menus.create
   }
 );
 
+const nativeMessagingHostName = "streamlink_handoff_host";
+
 browser.menus.onClicked.addListener(info =>
+{
+  browser.storage.local.get()
+  .then(storageValues =>
   {
-    browser.storage.local.get()
-      .then(storageValues =>
-      {
-        let linkUrl = info.linkUrl;
-        if (storageValues.player) {var player = "--player=" + storageValues.player};
-        let quality = storageValues.quality || "best";
-        let playerArgs = storageValues.playerArgs;
+    let linkUrl = info.linkUrl;
+    if (storageValues.player) {var player = "--player=" + storageValues.player};
+    let quality = storageValues.quality || "best";
+    let otherArgs = storageValues.otherArgs;
 
-        let streamlinkArguments = [player, playerArgs, linkUrl, quality].join(" ").trim();
+    let streamlinkArguments = [player, otherArgs, linkUrl, quality].join(" ").trim();
 
-        if (info.menuItemId == "streamlink-handoff")
-        {
-          browser.runtime.sendNativeMessage("streamlink_handoff_host", streamlinkArguments);
-        }
+    if (info.menuItemId == "streamlink-handoff")
+    {
+      browser.runtime.sendNativeMessage(nativeMessagingHostName, streamlinkArguments);
+    }
 
-        if (info.menuItemId == "streamlink-handoff-hls")
-        {
-          streamlinkArguments = ["--player-passthrough=hls", streamlinkArguments].join(" ");
-          browser.runtime.sendNativeMessage("streamlink_handoff_host", streamlinkArguments);
-        }
-      });
-  }
-);
+    if (info.menuItemId == "streamlink-handoff-hls")
+    {
+      streamlinkArguments = ["--player-passthrough=hls", streamlinkArguments].join(" ");
+      browser.runtime.sendNativeMessage(nativeMessagingHostName, streamlinkArguments);
+    }
+  });
+});
