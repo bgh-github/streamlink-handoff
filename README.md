@@ -1,8 +1,6 @@
 # Streamlink Handoff
 
-> :exclamation: This extension is experimental. Issues with the extension on Windows are currently being worked through 
-
-Streamlink Handoff is a Firefox browser companion extension for [Streamlink](https://streamlink.github.io). The extension adds a context menu (right-click) option, providing a way to conveniently pass supported video URLs to Streamlink for playback.
+Streamlink Handoff is a Firefox browser companion extension for [Streamlink](https://streamlink.github.io). It adds a context menu (right-click) option, providing a way to conveniently pass supported video URLs to Streamlink for playback.
 
 Available from [addons.mozilla.org](https://addons.mozilla.org/firefox/addon/streamlink-handoff/)
 
@@ -75,19 +73,11 @@ If curious, you're encouraged to inspect the commands before running them.
   cat > $host_dir/$host_program << 'EOF'
   #!/bin/bash
 
-  if [ $STREAMLINK_HANDOFF_HOST_LOG = 1 ]
-  then
-    exec >> /tmp/"$(date --iso-8601)"_streamlink-handoff-host.log 2>&1
-    set -o xtrace
-    date
-  fi
-
   message_byte_length=$(od --address-radix=n --read-bytes=4 --format=dL | tr --delete " ")
-
   message=$(od --address-radix=n --read-bytes="$message_byte_length" --format=x1 | xxd --plain --revert)
   message=$(echo $message | sed --expression='s/^"//' --expression='s/"$//')
 
-  streamlink $message
+  streamlink $message > /dev/null 2>&1
   EOF
 
   chmod u+x $host_dir/$host_program
@@ -126,26 +116,17 @@ If curious, you're encouraged to inspect the commands before running them.
   Set-ItemProperty -Path $RegKey -Name "(Default)" -Value $ManifestFile.FullName -Type String -Force
 
   # Program(s)
-  $BatchFileContent = "powershell -ExecutionPolicy Bypass -File `"$(Join-Path -Path $HostFolderPath -ChildPath streamlink-handoff.ps1)`""
+  $BatchFileContent = "@echo off & powershell -ExecutionPolicy Bypass -File `"$(Join-Path -Path $HostFolderPath -ChildPath streamlink-handoff.ps1)`""
   Set-Content -Path (Join-Path -Path $HostFolderPath -ChildPath $HostProgram) -Value $BatchFileContent -Force
 
   $PSFileContent = @'
-  If ($Env:STREAMLINK_HANDOFF_HOST_LOG -Eq 1)
-  {
-      Start-Transcript -Path (Join-Path -Path $Env:Temp -ChildPath ((Get-Date -Format yyyy-MM-dd) + "_streamlink-handoff-host.log")) -IncludeInvocationHeader -Append
-      Get-Date
-  }
-
   $BinaryReader = New-Object -TypeName System.IO.BinaryReader([System.Console]::OpenStandardInput())
 
   $MessageByteLength = $BinaryReader.ReadInt32()
-  Write-Output -InputObject "Message byte length: $MessageByteLength"
-
   $Message = [System.Text.Encoding]::UTF8.GetString($BinaryReader.ReadBytes($MessageByteLength))
   $Message = $Message.Trim('"')
-  Write-Output -InputObject "Message: $Message"
 
-  Start-Process -FilePath streamlink -ArgumentList $Message
+  Start-Process -FilePath streamlink -ArgumentList $Message -Wait | Out-Null
   '@
 
   Set-Content -Path (Join-Path -Path $HostFolderPath streamlink-handoff.ps1) -Value $PSFileContent -Force
@@ -158,15 +139,13 @@ Review [requirements](#requirements). Though not specifically mentioned, it's as
 
 * Firefox (for desktop)
 * On Linux - core utilities, namely `od` and `xxd`
-* On Windows - testing occurs against Windows PowerShell 5.1 ([installed by default](https://docs.microsoft.com/powershell/scripting/windows-powershell/install/windows-powershell-system-requirements#windows-powershell-51) on Windows 10+)
+* On Windows - tested against Windows PowerShell 5.1 ([installed by default](https://docs.microsoft.com/powershell/scripting/windows-powershell/install/windows-powershell-system-requirements#windows-powershell-51) on Windows 10+)
 
 An important early troubleshooting step is to check that Streamlink can successfully launch a video from the command line (with any chosen options) independent of Streamlink Handoff. For example, a simple (default) command, `streamlink twitch.tv/monstercat best`. If this fails, the broader problem will need to be addressed before retrying the extension.
 
 If Firefox is open in Private Browsing mode, Streamlink Handoff must be [allowed to run in Private Windows](https://support.mozilla.org/kb/extensions-private-browsing).
 
-You can try rerunning the first time [native messaging host setup](#first-time-setup) for your platform to reapply configuration.
-
-The Streamlink Handoff native messaging host configurations provided above will also log their execution if an environment variable `STREAMLINK_HANDOFF_HOST_LOG=1` is set. Log files are output to `/tmp` on Linux and `%TEMP%` on Windows.
+You can also try rerunning the first time [native messaging host setup](#first-time-setup) for your platform to reapply recommended configuration.
 
 ## Motivation
 
