@@ -1,8 +1,6 @@
 #!/bin/bash
 
-readarray -t standard_plugins < <(wget --quiet --output-document=- https://streamlink.github.io/plugin_matrix.html | hxnormalize | hxclean | hxselect -c 'table tr td:nth-child(2) p' | grep '\S' | grep --invert-match '\.\.\.' | tr --delete " ")
-readarray -t footnote_plugins < <(wget --quiet --output-document=- https://streamlink.github.io/plugin_matrix.html | hxnormalize | hxclean | hxselect -c 'dl.footnote p' | grep '\S' | tr --delete " ")
+readarray -t plugin_urls < <(wget --quiet --output-document=- https://streamlink.github.io/plugins.html | hxnormalize | hxclean | hxselect -c '#plugins section dl dd.field-odd:first-of-type ul li p' | grep '\S' | tr --delete " ")
+readarray -t plugin_urls < <(printf "\"*://*.%s/*\"\n" "${plugin_urls[@]}")
 
-plugins_urls=(${standard_plugins[@]} ${footnote_plugins[@]})
-
-echo $(printf "\"*://*.%s/*\", " "${plugins_urls[@]}") | sed 's/.$//'
+echo $(IFS=, ; echo "${plugin_urls[*]}" | sed --expression='s/,/, /g')
