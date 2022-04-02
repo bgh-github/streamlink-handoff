@@ -143,9 +143,13 @@ Review [requirements](#requirements). Though not specifically mentioned, it's as
 * On Linux - core utilities, namely `od` and `xxd`
 * On Windows - tested against Windows PowerShell 5.1 ([installed by default](https://docs.microsoft.com/powershell/scripting/windows-powershell/install/windows-powershell-system-requirements#windows-powershell-51) on Windows 10+)
 
-An important early troubleshooting step is to check that Streamlink can successfully launch a video from the command line (with any chosen options) independent of Streamlink Handoff. For example, a simple (default) command, `streamlink twitch.tv/monstercat best`. If this fails, the broader problem will need to be addressed before retrying the extension.
+To avoid unnecessary context menu entries, the Streamlink Handoff item is set to display only for hyperlinks matching URLs sourced from Streamlink's [plugins article](https://streamlink.github.io/plugins.html). An example link that can be used for testing is below:
+
+https://www.twitch.tv/monstercat
 
 If Firefox is open in Private Browsing mode, Streamlink Handoff must be [allowed to run in Private Windows](https://support.mozilla.org/kb/extensions-private-browsing).
+
+If the context menu is appearing but videos won't load, a initial troubleshooting step should be to check that Streamlink can successfully launch a video from the command line (with any chosen options) independent of Streamlink Handoff. For example, a simple (default) command, `streamlink twitch.tv/monstercat best`. If this fails, the general problem will need to be addressed before retrying the extension.
 
 You can also try rerunning the first time [native messaging host setup](#first-time-setup) for your platform to reapply recommended configuration.
 
