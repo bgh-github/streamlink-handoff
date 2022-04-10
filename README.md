@@ -118,7 +118,7 @@ If curious, you're encouraged to inspect the commands before running them.
   Set-ItemProperty -Path $RegKey -Name "(Default)" -Value $ManifestFile.FullName -Type String -Force
 
   # Program(s)
-  $BatchFileContent = "@echo off & powershell -ExecutionPolicy Bypass -File `"$(Join-Path -Path $HostFolderPath -ChildPath streamlink-handoff.ps1)`""
+  $BatchFileContent = "@echo off & powershell -NoProfile -ExecutionPolicy Bypass -File `"$(Join-Path -Path $HostFolderPath -ChildPath streamlink-handoff.ps1)`""
   Set-Content -Path (Join-Path -Path $HostFolderPath -ChildPath $HostProgram) -Value $BatchFileContent -Force
 
   $PSFileContent = @'
@@ -128,7 +128,7 @@ If curious, you're encouraged to inspect the commands before running them.
   $Message = [System.Text.Encoding]::UTF8.GetString($BinaryReader.ReadBytes($MessageByteLength))
   $Message = $Message.Trim('"')
 
-  Start-Process -FilePath streamlink -ArgumentList $Message -Wait | Out-Null
+  Invoke-CimMethod -ClassName Win32_Process -Arguments @{CommandLine="$((Get-Command -Name streamlink).Source) $Message"} -MethodName Create | Out-Null
   '@
 
   Set-Content -Path (Join-Path -Path $HostFolderPath streamlink-handoff.ps1) -Value $PSFileContent -Force
