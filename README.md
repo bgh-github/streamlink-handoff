@@ -56,42 +56,42 @@ If curious, you're encouraged to inspect the commands before running them.
   This should create two Streamlink Handoff files (.json and .sh) under `$HOME/.mozilla/native-messaging-hosts`.
 
   ```bash
-  host_dir=$HOME/.mozilla/native-messaging-hosts
-  mkdir --parents $host_dir
+  host_dir="${HOME}/.mozilla/native-messaging-hosts"
+  mkdir --parents "${host_dir}"
 
   host_name=streamlink_handoff_host
   host_program=streamlink-handoff.sh
 
   # manifest
-  cat > $host_dir/$host_name.json << EOF
+  cat > "${host_dir}/${host_name}.json" << EOF
   {
-    "name": "$host_name",
+    "name": "${host_name}",
     "description": "Streamlink Handoff Native Messaging Host - Linux",
-    "path": "$host_dir/$host_program",
+    "path": "${host_dir}/${host_program}",
     "type": "stdio",
     "allowed_extensions": ["streamlink-handoff@bgh.io"]
   }
   EOF
 
   # host program
-  cat > $host_dir/$host_program << 'EOF'
+  cat > "${host_dir}/${host_program}" << 'EOF'
   #!/bin/bash
 
-  message_byte_length=$(od --address-radix=n --read-bytes=4 --format=dL | tr --delete " ")
-  message=$(od --address-radix=n --read-bytes="$message_byte_length" --format=x1 | xxd --plain --revert)
-  message=$(echo $message | sed --expression='s/^"//' --expression='s/"$//')
+  message_byte_length="$(od --address-radix=n --read-bytes=4 --format=dL | tr --delete " ")"
+  message="$(od --address-radix=n --read-bytes="${message_byte_length}" --format=x1 | xxd --plain --revert)"
+  message="$(echo "${message}" | sed --expression='s/^"//' --expression='s/"$//')"
 
-  streamlink $message > /dev/null 2>&1
+  streamlink ${message} > /dev/null 2>&1
   EOF
 
-  chmod u+x $host_dir/$host_program
+  chmod u+x "${host_dir}/${host_program}"
   ```
 </details>
 
 <details>
   <summary>Windows - PowerShell</summary>
   
-  Copying/pasting commands directly into a PowerShell console can be hit and miss, so it's instead recommended you copy the below script block into a new PowerShell ISE file and run (Ctrl + a to select all > F8 to run selection).
+  Copying/pasting commands directly into the PowerShell console can be hit and miss, so it's instead recommended you copy the below script block into a new PowerShell ISE file and run (Ctrl + a to select all > F8 to run selection).
 
   This should create a registry entry in addition to three Streamlink Handoff files (.json, .bat and .ps1) under `%APPDATA%\streamlink-handoff`.
 
