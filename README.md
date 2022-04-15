@@ -16,8 +16,10 @@ Absolutely no data is collected by this extension.
 
 <kbd>![image](/img/context-menu.png?raw=true)</kbd>
 
-> :information_source: pictured above, the context menu includes a standard 'Livestream' launch item along with the [seekable-friendly](https://github.com/streamlink/streamlink/issues/134) 'VOD (HLS Passthrough)' alternate playback option
-
+> :information_source: The context menu includes three main options
+> * Standard 'Livestream' Streamlink behaviour
+> * [Seekable-friendly](https://github.com/streamlink/streamlink/issues/134) 'VOD (Passthrough)' passthrough option where the player handles stream transport
+> * The 'Copy Command' item copies the full Streamlink command line string for either of the above to the clipboard, _without_ launching the stream
 
 **Extension preferences**
 
@@ -36,7 +38,7 @@ The so-called 'native messaging host' is the local app/program/binary that inter
 
 For Streamlink Handoff, a major goal here was to create the most generic and minimal reference implementations possible, with little to no external dependencies.
 
-On Linux this is acheieved through a Bash shell script, and on Windows a PowerShell script called via a Batch file wrapper.
+On Linux this is achieved through a Bash shell script, and on Windows a PowerShell script called via a Batch file wrapper.
 
 By keeping the native messaging host programs lean and constructing Streamlink parameters entirely within the extension, any future updates should be made far simpler.
 
@@ -149,15 +151,15 @@ https://www.twitch.tv/monstercat
 
 If Firefox is open in Private Browsing mode, Streamlink Handoff must be [allowed to run in Private Windows](https://support.mozilla.org/kb/extensions-private-browsing).
 
-If the context menu is appearing but videos won't load, a initial troubleshooting step should be to check that Streamlink can successfully launch a video from the command line (with any chosen options) independent of Streamlink Handoff. For example, a simple (default) command, `streamlink twitch.tv/monstercat best`. If this fails, the general problem will need to be addressed before retrying the extension.
+In cases where the context menu appears but videos won't load, an initial troubleshooting step should be to check that Streamlink can successfully launch a video from the command line independent of Streamlink Handoff. Test using a basic command like `streamlink twitch.tv/monstercat best`, or use the 'Copy Command' option to copy the Streamlink command line string to the clipboard. If there are issues running direct from the command line, the general problem will need to be addressed before retrying the extension.
 
-You can also try rerunning the first time [native messaging host setup](#first-time-setup) for your platform to reapply recommended configuration.
+You can also try rerunning the first time [native messaging host setup](#first-time-setup) for your platform to reapply the latest recommended host configuration.
 
 ## Motivation
 
 Streamlink Handoff came about from wanting to create something I would personally use and find useful.
 
-As a user of the excellent [Streamlink Twitch GUI](https://streamlink.github.io/streamlink-twitch-gui/) application, it was dissapointing that changes and limitations of Twitch's new API resulted in downscaling of the app's functionality, along with making authentication mandatory.
+As a user of the excellent [Streamlink Twitch GUI](https://streamlink.github.io/streamlink-twitch-gui/) application, it was disappointing that changes and limitations of Twitch's new API resulted in downscaling of the app's functionality, along with making authentication mandatory.
 
 This was a reminder to the degree third-party applications can be at the mercy of a service's API. Factoring in services that would generally rather funnel users towards their own website or app experience, an open and feature complete API that fosters third-party apps could be seen as at odds. It therefore seems like native first-party websites are the only "sure thing" that can be relied upon long-term for video browsing/discovery.
 
