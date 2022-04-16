@@ -4,11 +4,11 @@
 
 Streamlink Handoff is a Firefox browser companion extension for [Streamlink](https://streamlink.github.io). It adds a context menu (right-click) option, providing a way to conveniently pass supported video URLs to Streamlink for playback.
 
-Available from [addons.mozilla.org](https://addons.mozilla.org/firefox/addon/streamlink-handoff/)
+[<img src="/img/get-the-addon-fx-apr-2020.svg" height="50">](https://addons.mozilla.org/firefox/addon/streamlink-handoff/)
 
-> :warning: After installing the extension, the native messaging host setup [outlined here](#first-time-setup) **must** be performed for it to work correctly  
+> :warning: After installing the extension, the first-time native messaging host setup [explained here](#first-time-setup) **must** be performed for it to work correctly  
 
-Absolutely no data is collected by this extension.
+The extension respects your privacy and does not collect any data.
 
 ## Screenshots
 
@@ -16,10 +16,10 @@ Absolutely no data is collected by this extension.
 
 <kbd>![image](/img/context-menu.png?raw=true)</kbd>
 
-> :information_source: The context menu includes three main options
+> :information_source: The context menu includes three main items
 > * Standard 'Livestream' Streamlink behaviour
-> * [Seekable-friendly](https://github.com/streamlink/streamlink/issues/134) 'VOD (Passthrough)' passthrough option where the player handles stream transport
-> * The 'Copy Command' item copies the full Streamlink command line string for either of the above to the clipboard, _without_ launching the stream
+> * [Seekable-friendly](https://github.com/streamlink/streamlink/issues/134) 'VOD (Passthrough)' where the player handles stream transport
+> * The 'Copy Command' item allows copying the full Streamlink command line string to the clipboard for either of the above, _without_ launching the stream
 
 **Extension preferences**
 
@@ -91,7 +91,7 @@ If curious, you're encouraged to inspect the commands before running them.
 <details>
   <summary>Windows - PowerShell</summary>
   
-  Copying/pasting commands directly into the PowerShell console can be hit and miss, so it's instead recommended you copy the below script block into a new PowerShell ISE file and run (Ctrl + a to select all > F8 to run selection).
+  Copying/pasting commands directly into the PowerShell console can be hit and miss, so it's a good idea to instead copy the below script block into a new PowerShell ISE file and run (Ctrl + a to select all > F8 to run selection).
 
   This should create a registry entry in addition to three Streamlink Handoff files (.json, .bat and .ps1) under `%APPDATA%\streamlink-handoff`.
 
@@ -153,7 +153,7 @@ If Firefox is open in Private Browsing mode, Streamlink Handoff must be [allowed
 
 In cases where the context menu appears but videos won't load, an initial troubleshooting step should be to check that Streamlink can successfully launch a video from the command line independent of Streamlink Handoff. Test using a basic command like `streamlink twitch.tv/monstercat best`, or use the 'Copy Command' option to copy the Streamlink command line string to the clipboard. If there are issues running direct from the command line, the general problem will need to be addressed before retrying the extension.
 
-You can also try rerunning the first time [native messaging host setup](#first-time-setup) for your platform to reapply the latest recommended host configuration.
+You can also try rerunning the first-time [native messaging host setup](#first-time-setup) for your platform to reapply the latest recommended host configuration.
 
 ## Motivation
 
