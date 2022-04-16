@@ -10,7 +10,7 @@ Streamlink Handoff is a Firefox browser companion extension for [Streamlink](htt
 
 The extension respects your privacy and does not collect any data.
 
-## Screenshots
+## In Action
 
 **Context menu**
 
