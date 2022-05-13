@@ -1,6 +1,6 @@
 # Streamlink Handoff
 
-<img src="/extension/icon.svg" width="100%" height="150">
+<img src="/extension/icon.svg" width="100%" height="130">
 
 Streamlink Handoff is a Firefox browser companion extension for [Streamlink](https://streamlink.github.io). It adds a context menu (right-click) option, providing a way to conveniently pass supported video URLs to Streamlink for playback.
 
@@ -8,7 +8,7 @@ Streamlink Handoff is a Firefox browser companion extension for [Streamlink](htt
 
 > :warning: After installing the extension, the first-time native messaging host setup [explained here](#first-time-setup) **must** be performed for it to work correctly  
 
-The extension respects your privacy and does not collect any data.
+Streamlink Handoff respects your privacy and does not collect any data.
 
 ## In Action
 
@@ -96,13 +96,13 @@ If curious, you're encouraged to inspect the commands before running them.
   This should create a registry entry in addition to three Streamlink Handoff files (.json, .bat and .ps1) under `%APPDATA%\streamlink-handoff`.
 
   ```powershell
-  # Manifest
   $HostFolderPath = Join-Path -Path $Env:APPDATA -ChildPath streamlink-handoff
   If (-Not (Test-Path -Path $HostFolderPath)) {New-Item -Path $HostFolderPath -ItemType Directory}
 
   $HostName = "streamlink_handoff_host"
   $HostProgram = "streamlink-handoff.bat"
 
+  # Manifest
   $MainifestContent = @"
   {
     "name": "$HostName",
@@ -119,7 +119,7 @@ If curious, you're encouraged to inspect the commands before running them.
   If (-Not (Test-Path -Path $RegKey)) {New-Item -Path $RegKey -Force}
   Set-ItemProperty -Path $RegKey -Name "(Default)" -Value $ManifestFile.FullName -Type String -Force
 
-  # Program(s)
+  # Host Program(s)
   $BatchFileContent = "@echo off & powershell -NoProfile -ExecutionPolicy Bypass -File `"$(Join-Path -Path $HostFolderPath -ChildPath streamlink-handoff.ps1)`""
   Set-Content -Path (Join-Path -Path $HostFolderPath -ChildPath $HostProgram) -Value $BatchFileContent -Force
 
@@ -181,6 +181,6 @@ As a novice programmer at best, I am open to suggestions.
 
 ## Acknowledgements
 
-This extension would not be made possible without the [Streamlink project](https://github.com/streamlink/streamlink)
+The extension would not be made possible without the [Streamlink project](https://github.com/streamlink/streamlink)
 
 Extension icon created from a mashup of [Twemoji](https://twemoji.twitter.com) ["raised hand"](https://github.com/twitter/twemoji/blob/master/assets/svg/270b.svg) emoji image and the [Streamlink icon](https://github.com/streamlink/streamlink/blob/master/icon.svg)
