@@ -14,7 +14,14 @@ Streamlink Handoff respects your privacy and does not collect any data.
 
 **Context menu**
 
-<kbd>![image](/img/context-menu.png?raw=true)</kbd>
+<kbd>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/bgh-github/streamlink-handoff/main/img/context-menu-dark.png">
+    <img src="https://raw.githubusercontent.com/bgh-github/streamlink-handoff/main/img/context-menu.png">
+  </picture>
+</kbd>
+<br/>
+<br/>
 
 > :information_source: The context menu includes three main items
 > * Standard 'Livestream' Streamlink behaviour
@@ -23,7 +30,12 @@ Streamlink Handoff respects your privacy and does not collect any data.
 
 **Extension preferences**
 
-<kbd>![image](/img/options.png?raw=true)</kbd>
+<kbd>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/bgh-github/streamlink-handoff/main/img/options-dark.png">
+    <img src="https://raw.githubusercontent.com/bgh-github/streamlink-handoff/main/img/options.png">
+  </picture>
+</kbd>
 
 ## Requirements
 

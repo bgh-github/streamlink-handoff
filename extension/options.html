@@ -3,7 +3,18 @@
   <head>
     <meta charset="UTF-8">
     <title>Streamlink Handoff Preferences</title>
-    <style>form label {display: block; padding-bottom: 5px;} a {padding-top: 15px;}</style>
+    <style>
+      form label {display: block; padding-bottom: 5px;}
+      #buttons {padding-top: 10px;}
+      #link {padding-top: 15px;}
+      a {text-decoration: none;}
+      a:hover {text-decoration: underline;}
+      @media (prefers-color-scheme: dark)
+      {
+        body {background-color: rgb(35,34,43); color: rgb(191,191,201); padding-bottom: 99px;}
+        a {color: cyan;}
+      }
+    </style>
   </head>
   <body>
     <form>
@@ -16,10 +27,12 @@
       </label>
       <label>Other arguments <input type="text" id="otherArgs"></label>
       <label>Quality <input type="text" id="quality" placeholder="best"></label>
-      <button type="submit">Save</button>
-      <input type="reset">
+      <div id="buttons">
+        <button type="submit">Save</button>
+        <input type="reset">
+      </div>
     </form>
-    <a href="https://streamlink.github.io/cli.html">Streamlink command-line reference &#128279;</a>
+    <div id="link"><a href="https://streamlink.github.io/cli.html">Streamlink command-line reference</a> &#128279;</div>
     <script src="options.js"></script>
   </body>
 </html>
