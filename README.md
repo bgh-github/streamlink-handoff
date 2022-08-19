@@ -165,7 +165,7 @@ If Firefox is open in Private Browsing mode, Streamlink Handoff must be [allowed
 
 If Streamlink was only just installed prior, Firefox may need to be closed/reopened to reflect updated PATH. If in doubt, reboot.
 
-In cases where the context menu appears but videos won't load, an initial troubleshooting step should be to check that Streamlink can successfully launch a video from the command line independent of Streamlink Handoff. Test using a basic command like `streamlink twitch.tv/monstercat best`, or use the 'Copy Command' option to copy the Streamlink command line string to the clipboard. If there are issues running direct from the command line, the general problem will need to be addressed before retrying the extension.
+In cases where the context menu appears but videos won't load, an initial troubleshooting step should be to check that Streamlink can successfully launch a video from the command line independent of Streamlink Handoff. Test using a basic command like `streamlink twitch.tv/monstercat best`, or use the 'Copy Command' option to copy the Streamlink command line string to the clipboard. Any issues when running direct from the command line should be addressed before retrying the extension.
 
 You can also try rerunning the first-time [native messaging host setup](#first-time-setup) for your platform to reapply the latest recommended host configuration.
 
