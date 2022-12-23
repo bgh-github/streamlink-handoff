@@ -6,7 +6,7 @@ Streamlink Handoff is a Firefox browser companion extension for [Streamlink](htt
 
 [<img src="/img/get-the-addon-fx-apr-2020.svg" height="50">](https://addons.mozilla.org/firefox/addon/streamlink-handoff/)
 
-> :warning: After installing the extension, the first-time native messaging host setup [explained here](#first-time-setup) **must** be performed for it to work correctly  
+> :warning: After installing the extension, the first-time native messaging host setup [explained here](#first-time-setup) **must** be performed for it to work correctly
 
 Streamlink Handoff respects your privacy and does not collect any data.
 
@@ -62,9 +62,9 @@ If curious, you're encouraged to inspect the commands before running them.
 
 <details>
   <summary>Linux - Bash</summary>
-  
+
   Simply copy/paste the below script block into your terminal and execute.
-  
+
   This should create two Streamlink Handoff files (.json and .sh) under `$HOME/.mozilla/native-messaging-hosts`.
 
   ```bash
@@ -98,11 +98,12 @@ If curious, you're encouraged to inspect the commands before running them.
 
   chmod u+x "${host_dir}/${host_program}"
   ```
+
 </details>
 
 <details>
   <summary>Windows - PowerShell</summary>
-  
+
   Copying/pasting commands directly into the PowerShell console can be hit and miss, so it's a good idea to instead copy the below script block into a new PowerShell ISE file and run (Ctrl + a to select all > F8 to run selection).
 
   This should create a registry entry in addition to three Streamlink Handoff files (.json, .bat and .ps1) under `%APPDATA%\streamlink-handoff`.
@@ -126,7 +127,7 @@ If curious, you're encouraged to inspect the commands before running them.
   "@
 
   $ManifestFile = New-Item -Path (Join-Path -Path $HostFolderPath -ChildPath "$HostName.json") -Value $MainifestContent -Force
-  
+
   $RegKey = "HKCU:\SOFTWARE\Mozilla\NativeMessagingHosts\$HostName"
   If (-Not (Test-Path -Path $RegKey)) {New-Item -Path $RegKey -Force}
   Set-ItemProperty -Path $RegKey -Name "(Default)" -Value $ManifestFile.FullName -Type String -Force
@@ -147,6 +148,7 @@ If curious, you're encouraged to inspect the commands before running them.
 
   Set-Content -Path (Join-Path -Path $HostFolderPath streamlink-handoff.ps1) -Value $PSFileContent -Force
   ```
+
 </details>
 
 ## Troubleshooting
@@ -159,7 +161,7 @@ Review [requirements](#requirements). Though not specifically mentioned, it's as
 
 To avoid unnecessary context menu clutter, the Streamlink Handoff entry is set to display only for hyperlinks matching URLs sourced from Streamlink's [plugins article](https://streamlink.github.io/plugins.html). An example link that can be used for testing is below:
 
-https://www.twitch.tv/monstercat
+<https://www.twitch.tv/monstercat>
 
 If Firefox is open in Private Browsing mode, Streamlink Handoff must be [allowed to run in Private Windows](https://support.mozilla.org/kb/extensions-private-browsing).
 
