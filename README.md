@@ -157,7 +157,7 @@ Review [requirements](#requirements). Though not specifically mentioned, it's as
 
 * Firefox (for desktop)
 * On Linux - core utilities, namely `od` and `xxd`
-* On Windows - tested against Windows PowerShell 5.1 ([installed by default](https://docs.microsoft.com/powershell/scripting/windows-powershell/install/windows-powershell-system-requirements#windows-powershell-51) on Windows 10+)
+* On Windows - tested against Windows PowerShell 5.1 ([installed by default](https://learn.microsoft.com/powershell/scripting/windows-powershell/install/windows-powershell-system-requirements#windows-powershell-51) on Windows 10+)
 
 To avoid unnecessary context menu clutter, the Streamlink Handoff entry is set to display only for hyperlinks matching URLs sourced from Streamlink's [plugins article](https://streamlink.github.io/plugins.html). An example link that can be used for testing is below:
 
@@ -189,6 +189,7 @@ As a novice programmer at best, I am open to suggestions.
 
 ## Future Possibilities
 
+* Manifest V3
 * Improve error handing and logging
 * Build and release automation
 * Localisation
