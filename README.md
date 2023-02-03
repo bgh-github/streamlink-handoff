@@ -110,7 +110,7 @@ If curious, you're encouraged to inspect the commands before running them.
 <details>
   <summary>Windows - PowerShell</summary>
 
-  Copying/pasting commands directly into the PowerShell console can unreliable, so it's a good idea to instead copy the below script block into a new PowerShell ISE file and run (Ctrl + a to select all > F8 to run selection).
+  Copying/pasting commands directly into the PowerShell console can be unreliable, so it's a good idea to instead copy the below script block into a new PowerShell ISE file and run (Ctrl + a to select all > F8 to run selection).
 
   This should create a registry entry in addition to three Streamlink Handoff files (.json, .bat and .ps1) under `%APPDATA%\streamlink-handoff`.
 
