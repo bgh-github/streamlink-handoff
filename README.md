@@ -46,11 +46,17 @@ Streamlink Handoff respects your privacy and does not collect any data.
 
 ## Native Messaging Host
 
-The so-called 'native messaging host' is the local app/program/binary that interfaces with the browser extension.
+Under the modern WebExtensions API model, what's referred to as [native messaging](https://developer.mozilla.org/docs/Mozilla/Add-ons/WebExtensions/Native_messaging) is the way extensions can communicate with programs running outside the browser sandbox.
 
-For Streamlink Handoff, a major goal here was to create the most generic and minimal reference implementations possible, with little to no external dependencies.
+An important part to this is the so-called native messaging 'host', which can be thought of as the local app/program/binary that at extension implementing native messaging exchanges messages with.
 
-On Linux this is achieved through a Bash shell script, and on Windows a PowerShell script called via a Batch file wrapper.
+Some applications may directly integrate their own native messaging host capabilities (KeePassXC being [one](https://keepassxc.org/docs/KeePassXC_UserGuide.html#_setup_browser_integration) [example](https://addons.mozilla.org/firefox/addon/keepassxc-browser/)). In the case of Streamlink Handoff, an intermediary host program script - for which first time manifest and host program setup actions are provided below - can act as conduit between the browser extension and Streamlink whereby:
+
+> A Streamlink Handoff browser extension action is invoked, per [manifest definition](https://developer.mozilla.org/docs/Mozilla/Add-ons/WebExtensions/Native_messaging#app_manifest) sends message to -> host program script -> which in turn calls Streamlink, relaying on the video URL and any other playback preferences
+
+For Streamlink Handoff, a major goal was to create the most generic and minimal host reference implementations possible, with little to no external dependencies.
+
+On Linux this is achieved through a shell script, and on Windows a PowerShell script called via a Batch file wrapper.
 
 By keeping the native messaging host programs lean and constructing Streamlink parameters entirely within the extension, any future updates should be made far simpler.
 
@@ -61,7 +67,7 @@ Expand the sections below for pre-canned native messaging host scripted setup co
 If curious, you're encouraged to inspect the commands before running them.
 
 <details>
-  <summary>Linux - Bash</summary>
+  <summary>Linux - Shell</summary>
 
   Simply copy/paste the below script block into your terminal and execute.
 
@@ -104,7 +110,7 @@ If curious, you're encouraged to inspect the commands before running them.
 <details>
   <summary>Windows - PowerShell</summary>
 
-  Copying/pasting commands directly into the PowerShell console can be hit and miss, so it's a good idea to instead copy the below script block into a new PowerShell ISE file and run (Ctrl + a to select all > F8 to run selection).
+  Copying/pasting commands directly into the PowerShell console can unreliable, so it's a good idea to instead copy the below script block into a new PowerShell ISE file and run (Ctrl + a to select all > F8 to run selection).
 
   This should create a registry entry in addition to three Streamlink Handoff files (.json, .bat and .ps1) under `%APPDATA%\streamlink-handoff`.
 
@@ -151,12 +157,18 @@ If curious, you're encouraged to inspect the commands before running them.
 
 </details>
 
+<details>
+  <summary>macOS - Untested</summary>
+
+  I don't currently have the means to test on macOS. The Linux setup and host program shell scripts however should presumably work without too many modifications - be aware of distinct macOS [manifest locations](https://developer.mozilla.org/docs/Mozilla/Add-ons/WebExtensions/Native_manifests#macos).
+</details>
+
 ## Troubleshooting
 
 Review [requirements](#requirements). Though not specifically mentioned, it's assumed relatively recent versions of the following are installed
 
 * Firefox (for desktop)
-* On Linux - core utilities, namely `od` and `xxd`
+* On Linux/(macOS?) - core utilities, namely `od` and `xxd`
 * On Windows - tested against Windows PowerShell 5.1 ([installed by default](https://learn.microsoft.com/powershell/scripting/windows-powershell/install/windows-powershell-system-requirements#windows-powershell-51) on Windows 10+)
 
 To avoid unnecessary context menu clutter, the Streamlink Handoff entry is set to display only for hyperlinks matching URLs sourced from Streamlink's [plugins article](https://streamlink.github.io/plugins.html). An example link that can be used for testing is below:
@@ -189,15 +201,15 @@ As a novice programmer at best, I am open to suggestions.
 
 ## Future Possibilities
 
+* Build and release automation
+* Arch User Repository (AUR) native messaging host configuration package
 * Manifest V3
 * Improve error handing and logging
-* Build and release automation
 * Localisation
 * Chromium support
-* Arch User Repository (AUR) native messaging host configuration package
 
 ## Acknowledgements
 
-The extension would not be made possible without the [Streamlink project](https://github.com/streamlink/streamlink)
+None of this would be possible without the [Streamlink project](https://github.com/streamlink/streamlink)
 
 Extension icon created from a mashup of [Twemoji](https://twemoji.twitter.com) ["raised hand"](https://github.com/twitter/twemoji/blob/master/assets/svg/270b.svg) emoji image and the [Streamlink icon](https://github.com/streamlink/streamlink/blob/master/icon.svg)
