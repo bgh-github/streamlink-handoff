@@ -48,7 +48,7 @@ Streamlink Handoff respects your privacy and does not collect any data.
 
 Under the modern WebExtensions API model, what's referred to as [native messaging](https://developer.mozilla.org/docs/Mozilla/Add-ons/WebExtensions/Native_messaging) is the way extensions can communicate with programs running outside the browser sandbox.
 
-An important part to this is the so-called native messaging 'host', which can be thought of as the local app/program/binary that at extension implementing native messaging exchanges messages with.
+An important part to this is the so-called native messaging 'host', which can be thought of as the local app/program/binary that an extension implementing native messaging exchanges messages with.
 
 Some applications may directly integrate their own native messaging host capabilities (KeePassXC being [one](https://keepassxc.org/docs/KeePassXC_UserGuide.html#_setup_browser_integration) [example](https://addons.mozilla.org/firefox/addon/keepassxc-browser/)). In the case of Streamlink Handoff, an intermediary host program script - for which first time manifest and host program setup actions are provided below - can act as conduit between the browser extension and Streamlink whereby:
 
