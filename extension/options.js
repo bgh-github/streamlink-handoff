@@ -2,7 +2,7 @@ const options = ["player", "otherArgs", "quality"];
 
 function restoreOptions()
 {
-  options.forEach(optionKey => 
+  options.forEach(optionKey =>
   {
     browser.storage.local.get(optionKey)
     .then(storageItem =>
@@ -18,11 +18,11 @@ function restoreOptions()
 function saveOptions(event)
 {
   event.preventDefault();
-  
+
   options.forEach(optionKey =>
   {
     let optionValue = document.querySelector("#"+optionKey).value;
-    
+
     if (optionValue)
     {
       browser.storage.local.set({[optionKey]: optionValue});
