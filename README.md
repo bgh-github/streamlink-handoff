@@ -46,7 +46,7 @@ Streamlink Handoff respects your privacy and does not collect any data.
 
 ## Native Messaging Host
 
-Under the modern WebExtensions API model, what's referred to as [native messaging](https://developer.mozilla.org/docs/Mozilla/Add-ons/WebExtensions/Native_messaging) is the way extensions can communicate with programs running outside the browser sandbox.
+Under the modern WebExtensions API model, what's referred to as [native messaging](https://developer.mozilla.org/docs/Mozilla/Add-ons/WebExtensions/Native_messaging) is the means by which extensions communicate with programs running outside the browser sandbox.
 
 An important part to this is the so-called native messaging 'host', which can be thought of as the local app/program/binary that an extension implementing native messaging exchanges messages with.
 
