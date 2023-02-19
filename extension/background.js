@@ -3,7 +3,7 @@ const streamlinkPluginUrls = ["*://*.abema.tv/*", "*://*.adultswim.com/*", "*://
 browser.menus.create({id: "streamlink-handoff", title: "Livestream", contexts: ["link"], targetUrlPatterns: streamlinkPluginUrls});
 browser.menus.create({id: "streamlink-handoff-vod", title: "VOD (Passthrough)", contexts: ["link"], targetUrlPatterns: streamlinkPluginUrls});
 
-let copyMenu = browser.menus.create({title: "Copy Command", contexts: ["link"], targetUrlPatterns: streamlinkPluginUrls});
+let copyMenu = browser.menus.create({id: "copy-command", title: "Copy Command", contexts: ["link"], targetUrlPatterns: streamlinkPluginUrls});
 browser.menus.create({id: "streamlink-handoff-copy", title: "Livestream", contexts: ["link"], targetUrlPatterns: streamlinkPluginUrls, parentId: copyMenu});
 browser.menus.create({id: "streamlink-handoff-vod-copy", title: "VOD (Passthrough)", contexts: ["link"], targetUrlPatterns: streamlinkPluginUrls, parentId: copyMenu});
 
