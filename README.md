@@ -175,6 +175,8 @@ To avoid unnecessary context menu clutter, the Streamlink Handoff entry is set t
 
 <https://www.twitch.tv/monstercat>
 
+[![Sync plugin URLs](../../actions/workflows/main.yml/badge.svg)](../../actions/workflows/main.yml)
+
 If Firefox is open in Private Browsing mode, Streamlink Handoff must be [allowed to run in Private Windows](https://support.mozilla.org/kb/extensions-private-browsing).
 
 If Streamlink was only just installed prior, Firefox may need to be closed/reopened to reflect updated PATH. If in doubt, reboot.
