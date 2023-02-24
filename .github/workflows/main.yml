@@ -24,7 +24,7 @@ jobs:
           echo "documented_urls=$(IFS=,; echo "${plugin_urls[*]}" | sed --expression='s/,/, /g')" >> $GITHUB_ENV
       - name: Extract current extension URL list
         run: echo "extension_urls=$(grep --perl-regexp --only-matching 'const streamlinkPluginUrls = \[\K[^\]]*' extension/background.js)" >> $GITHUB_ENV
-      - name: Update list and create pull request if required
+      - name: Create pull request for updating list if required
         if:  env.extension_urls != env.documented_urls
         env:
           GH_TOKEN: ${{ github.token }}
