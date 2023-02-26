@@ -6,7 +6,7 @@ Streamlink Handoff is a Firefox browser companion extension for [Streamlink](htt
 
 [<img src="/img/get-the-addon-fx-apr-2020.svg" height="50">](https://addons.mozilla.org/firefox/addon/streamlink-handoff/)
 
-> :warning: After installing the extension, the first-time native messaging host setup [explained here](#first-time-setup) **must** be performed for it to work correctly
+> :warning: After installing the extension, the first-time native messaging host setup [steps here](#first-time-setup) are **necessary** for things to work correctly
 
 Streamlink Handoff respects your privacy and does not collect any data.
 
@@ -50,7 +50,7 @@ Under the modern WebExtensions API model, what's referred to as [native messagin
 
 An important part to this is the so-called native messaging 'host', which can be thought of as the local app/program/binary that an extension implementing native messaging exchanges messages with.
 
-Some applications may directly integrate their own native messaging host capabilities (KeePassXC being [one](https://keepassxc.org/docs/KeePassXC_UserGuide.html#_setup_browser_integration) [example](https://addons.mozilla.org/firefox/addon/keepassxc-browser/)). In the case of Streamlink Handoff, an intermediary host program script - for which first time manifest and host program setup actions are provided below - can act as conduit between the browser extension and Streamlink whereby:
+Some applications may directly integrate their own native messaging host capabilities. In the case of Streamlink Handoff, an intermediary host program script - for which first time manifest and host program setup steps are provided below - can act as conduit between the browser extension and Streamlink whereby:
 
 > A Streamlink Handoff browser extension action is invoked, per [manifest definition](https://developer.mozilla.org/docs/Mozilla/Add-ons/WebExtensions/Native_messaging#app_manifest) sends message to -> host program script -> which in turn calls Streamlink, relaying on the video URL and any other playback preferences
 
@@ -62,12 +62,12 @@ By keeping the native messaging host programs lean and constructing Streamlink p
 
 ### First Time Setup
 
-Expand the sections below for pre-canned native messaging host scripted setup commands specific to your platform. The related components will be created in user-based (user home/profile) locations.
+Platform-specific steps to apply first-time local native messaging host configuration are provided below. For methods other than the Linux AUR package, the related components will be created in user-based (user home/profile) locations.
 
-If curious, you're encouraged to inspect the commands before running them.
+If curious, you're encouraged to inspect commands before running them.
 
 <details>
-  <summary>Linux - Shell</summary>
+  <summary>Linux - Generic Shell</summary>
 
   Simply copy/paste the below script block into your terminal and execute.
 
@@ -84,7 +84,7 @@ If curious, you're encouraged to inspect the commands before running them.
   cat > "${host_dir}/${host_name}.json" << EOF
   {
     "name": "${host_name}",
-    "description": "Streamlink Handoff Native Messaging Host - Linux",
+    "description": "Streamlink Handoff native messaging host - Linux",
     "path": "${host_dir}/${host_program}",
     "type": "stdio",
     "allowed_extensions": ["streamlink-handoff@bgh.io"]
@@ -95,15 +95,35 @@ If curious, you're encouraged to inspect the commands before running them.
   cat > "${host_dir}/${host_program}" << 'EOF'
   #!/bin/bash
 
-  message_byte_length="$(od --address-radix=n --read-bytes=4 --format=dL | tr --delete " ")"
-  message="$(od --address-radix=n --read-bytes="${message_byte_length}" --format=x1 | xxd --plain --revert)"
-  message="$(echo "${message}" | sed --expression='s/^"\(.*\)"$/\1/')"
+  message_byte_length=$(od --address-radix=n --read-bytes=4 --format=dL | tr --delete " ")
+  message=$(od --address-radix=n --read-bytes="${message_byte_length}" --format=x1 | xxd --plain --revert)
+  message=$(echo "${message}" | sed --expression='s/^"\(.*\)"$/\1/')
 
   streamlink ${message} > /dev/null 2>&1
   EOF
 
   chmod u+x "${host_dir}/${host_program}"
   ```
+
+</details>
+
+<details>
+  <summary>Linux - AUR Package</summary>
+
+  Users of Arch-based distros with access to the Arch User Repository (AUR) can install the [streamlink-handoff-host](https://aur.archlinux.org/packages/streamlink-handoff-host) AUR package.
+
+  ```shell
+  # using makepkg
+  pkgname=streamlink-handoff-host
+  git clone "https://aur.archlinux.org/${pkgname}.git"
+  cd "${pkgname}" || exit
+  makepkg --install --syncdeps
+
+  # aur helper example
+  [paru|yay] --sync streamlink-handoff-host
+  ```
+
+  Note: in line with [packaging guidelines](https://wiki.archlinux.org/title/Arch_package_guidelines#Directories), the necessary two Streamlink Handoff files are installed to `/usr/lib/mozilla/native-messaging-hosts`. Therefore making the native messaging host available to execute globally
 
 </details>
 
@@ -125,7 +145,7 @@ If curious, you're encouraged to inspect the commands before running them.
   $MainifestContent = @"
   {
     "name": "$HostName",
-    "description": "Streamlink Handoff Native Messaging Host - Windows",
+    "description": "Streamlink Handoff native messaging host - Windows",
     "path": "$HostProgram",
     "type": "stdio",
     "allowed_extensions": ["streamlink-handoff@bgh.io"]
@@ -161,6 +181,7 @@ If curious, you're encouraged to inspect the commands before running them.
   <summary>macOS - Untested</summary>
 
   I don't currently have the means to test on macOS. The Linux setup and host program shell scripts however should presumably work without too many modifications - be aware of distinct macOS [manifest locations](https://developer.mozilla.org/docs/Mozilla/Add-ons/WebExtensions/Native_manifests#macos).
+
 </details>
 
 ## Troubleshooting
