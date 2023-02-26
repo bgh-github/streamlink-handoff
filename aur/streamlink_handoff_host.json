@@ -1,0 +1,7 @@
+{
+  "name": "streamlink_handoff_host",
+  "description": "Streamlink Handoff native messaging host - Linux",
+  "path": "/usr/lib/mozilla/native-messaging-hosts/streamlink-handoff.sh",
+  "type": "stdio",
+  "allowed_extensions": ["streamlink-handoff@bgh.io"]
+}
