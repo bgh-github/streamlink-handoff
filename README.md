@@ -222,14 +222,9 @@ Secondary was the challenge and opportunity to gain some small insight into a so
 
 As a novice programmer at best, I am open to suggestions.
 
-## Future Possibilities
+## Future Plans
 
-* Build and release automation
-* Arch User Repository (AUR) native messaging host configuration package
 * Manifest V3
-* Improve error handing and logging
-* Localisation
-* Chromium support
 
 ## Acknowledgements
 
