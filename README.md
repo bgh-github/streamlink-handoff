@@ -120,7 +120,7 @@ If curious, you're encouraged to inspect commands before running them.
   makepkg --install --syncdeps
 
   # aur helper example
-  [paru|yay] --sync streamlink-handoff-host
+  <paru|yay> --sync streamlink-handoff-host
   ```
 
   Note: in line with [packaging guidelines](https://wiki.archlinux.org/title/Arch_package_guidelines#Directories), the necessary two Streamlink Handoff files are installed to `/usr/lib/mozilla/native-messaging-hosts`. Therefore making the native messaging host available to execute globally
