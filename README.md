@@ -2,7 +2,7 @@
 
 <img src="/extension/icon.svg" width="100%" height="130">
 
-Streamlink Handoff is a Firefox browser companion extension for [Streamlink](https://streamlink.github.io). It adds a context menu (right-click) option, providing a way to conveniently pass supported video URLs to Streamlink for playback.
+Streamlink Handoff is a Firefox browser companion extension for [Streamlink](https://streamlink.github.io). It adds a context menu (right-click) option, providing a convenient way to pass supported video URLs to Streamlink for playback.
 
 [<img src="/img/get-the-addon-fx-apr-2020.svg" height="50">](https://addons.mozilla.org/firefox/addon/streamlink-handoff/)
 
@@ -216,7 +216,7 @@ This was a reminder to the degree third-party applications can be at the mercy o
 
 Now it could be said that Streamlink and indeed Streamlink Handoff are themselves third-party software. The difference, I suppose, is their purpose is to _play_ videos, not browsing and discovery.
 
-So after all that, if the humble web browser was to be my primary video browsing interface, what gives? Ain't nobody got time for manually copy pasting links and crafting Streamlink command lines. And so Streamlink Handoff was born.
+So, if the humble web browser was to be my primary video browsing interface, what gives? Ain't nobody got time for manually copy pasting links and crafting Streamlink command lines. And so Streamlink Handoff was born.
 
 Secondary was the challenge and opportunity to gain some small insight into a software development project, from an initial thought bubble through to packaging and distribution.
 
