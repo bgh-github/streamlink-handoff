@@ -226,7 +226,7 @@ As a novice programmer at best, I am open to suggestions.
 
 * Manifest V3
 
-## Acknowledgements
+## Shout-out
 
 None of this would be possible without the [Streamlink project](https://github.com/streamlink/streamlink)
 
