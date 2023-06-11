@@ -224,7 +224,9 @@ As a novice programmer at best, I am open to suggestions.
 
 ## Future Plans
 
+* Improve native messaging response and error handling/logging
 * Manifest V3
+* Twitch [client integrity check](https://github.com/streamlink/streamlink/issues/5370) compatibility (if required)
 
 ## Shout-out
 
