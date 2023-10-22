@@ -6,7 +6,8 @@ Streamlink Handoff is a Firefox browser companion extension for [Streamlink](htt
 
 [<img src="/img/get-the-addon-fx-apr-2020.svg" height="50">](https://addons.mozilla.org/firefox/addon/streamlink-handoff/)
 
-> :warning: After installing the extension, the first-time native messaging host setup [steps here](#first-time-setup) are **necessary** for things to work correctly
+> [!IMPORTANT]
+> After installing the extension, the first-time native messaging host setup [steps here](#first-time-setup) are **necessary** for things to work correctly
 
 Streamlink Handoff respects your privacy and does not collect any data.
 
@@ -23,7 +24,8 @@ Streamlink Handoff respects your privacy and does not collect any data.
 <br/>
 <br/>
 
-> :information_source: The context menu includes three main items
+> [!NOTE]
+> The context menu includes three main items
 > * Standard 'Livestream' Streamlink behaviour
 > * [Seekable-friendly](https://github.com/streamlink/streamlink/issues/134) 'VOD (Passthrough)' where the player handles stream transport
 > * The 'Copy Command' item allows copying the full Streamlink command line string to the clipboard for either of the above, _without_ launching the stream
