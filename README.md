@@ -125,7 +125,7 @@ If curious, you're encouraged to inspect commands before running them.
   <paru|yay> --sync streamlink-handoff-host
   ```
 
-  Note: in line with [packaging guidelines](https://wiki.archlinux.org/title/Arch_package_guidelines#Directories), the necessary two Streamlink Handoff files are installed to `/usr/lib/mozilla/native-messaging-hosts` system-based location. Thus making the native messaging host available to execute for all users
+  Note: in line with [packaging guidelines](https://wiki.archlinux.org/title/Arch_package_guidelines#Directories), the necessary two Streamlink Handoff files are installed to `/usr/lib/mozilla/native-messaging-hosts` as a system-based location. Thus making the native messaging host available to execute for all users
 
 </details>
 
