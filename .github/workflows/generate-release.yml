@@ -13,7 +13,7 @@ jobs:
       addons_api_url: https://addons.mozilla.org/api/v5/
       changelog_definition: changelog.yml
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Zip extension files
         run: zip --recurse-paths --junk-paths "/tmp/${{ env.extension_name }}.zip" extension
       - name: JWT auth setup
