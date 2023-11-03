@@ -30,11 +30,13 @@ jobs:
             sed --expression='s|,|, |g')" \
             >> $GITHUB_ENV
       - name: Extract current extension URL list
-        run: echo "extension_urls=$(grep \
-          --perl-regexp \
-          --only-matching \
-          'const streamlinkPluginUrls = \[\K[^\]]*' extension/background.js)" \
-          >> $GITHUB_ENV
+        run: |
+          echo "extension_urls=$(grep \
+            --perl-regexp \
+            --only-matching \
+            'const streamlinkPluginUrls = \[\K[^\]]*' \
+            extension/background.js)" \
+            >> $GITHUB_ENV
       - name: Create pull request for updating list if required
         if:  env.extension_urls != env.documented_urls
         env:
