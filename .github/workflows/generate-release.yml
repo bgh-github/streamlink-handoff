@@ -20,21 +20,55 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          jwt_header=$(echo -n '{"alg":"HS256","typ":"JWT"}' | basenc --base64url --wrap=0 | sed --expression='s/=*$//')
-          jwt_payload=$(echo -n "{\"iss\":\"${{ secrets.FIREFOX_JWTISSUER }}\",\"jti\":\"${RANDOM}\",\"iat\":$(date +%s),\"exp\":$(($(date +%s) + 300))}" | basenc --base64url --wrap=0 | sed --expression='s/=*$//')
-          jwt_signature=$(echo -n "${jwt_header}.${jwt_payload}" | openssl dgst -sha256 -hmac "${{ secrets.FIREFOX_JWTSECRET }}" -binary | basenc --base64url --wrap=0 | sed --expression='s/=*$//')
-          echo "::add-mask::jwt_token"
+          jwt_header=$(echo -n '{"alg":"HS256","typ":"JWT"}' |
+            basenc --base64url --wrap=0 |
+            sed --expression='s|=*$||')
+          jwt_payload=$(echo -n \
+            "{\"iss\":\"${{ secrets.FIREFOX_JWTISSUER }}\",\"jti\":\"${RANDOM}\",\"iat\":$(date +%s),\"exp\":$(($(date +%s) + 300))}" |
+            basenc --base64url --wrap=0 |
+            sed --expression='s|=*$||')
+          jwt_signature=$(echo -n "${jwt_header}.${jwt_payload}" |
+            openssl dgst -sha256 -hmac "${{ secrets.FIREFOX_JWTSECRET }}" -binary |
+            basenc --base64url --wrap=0 |
+            sed --expression='s|=*$||')
+          echo '::add-mask::jwt_token'
           echo "jwt_token=$(echo "${jwt_header}.${jwt_payload}.${jwt_signature}")" >> $GITHUB_ENV
       - name: Upload to AMO and release new version
         run: |
-          upload_request=$(curl --request POST --header "Content-Type: multipart/form-data" --header "Authorization: JWT ${{ env.jwt_token }}" "${{ env.addons_api_url }}addons/upload/" --form "upload=@/tmp/${{ env.extension_name }}.zip" --form "channel=listed")
+          upload_request=$(curl \
+            --request POST \
+            --header 'Content-Type: multipart/form-data' \
+            --header "Authorization: JWT ${{ env.jwt_token }}" \
+            --form "upload=@/tmp/${{ env.extension_name }}.zip" \
+            --form 'channel=listed' \
+            --url "${{ env.addons_api_url }}addons/upload/")
           upload_uuid=$(echo "${upload_request}" | jq --raw-output '.uuid')
-          while [ "$(curl --header "Authorization: JWT ${{ env.jwt_token }}" "${{ env.addons_api_url }}addons/upload/${upload_uuid}/" | jq '.valid')" != true ]; do sleep 10; done
-          readarray -t notes < <(yq ".releases[] | select (.version == \"$(jq --raw-output '.version' extension/manifest.json)\").notes | .[]" ${{ env.changelog_definition }})
-          curl --request POST --header "Content-Type: application/json" --header "Authorization: JWT ${{ env.jwt_token }}" --data "{\"release_notes\":{\"en-US\": \"$((echo -e "<ul>\n$(for note in "${notes[@]}"; do echo "<li>${note}</li>"; done)\n</ul>") | sed --null-data 's/\n/\\n/g')\"},\"upload\": \"${upload_uuid}\"}" "${{ env.addons_api_url }}addons/addon/${{ env.extension_name }}/versions/"
+          while [ "$(curl \
+            --header "Authorization: JWT ${{ env.jwt_token }}" \
+            --url "${{ env.addons_api_url }}addons/upload/${upload_uuid}/" |
+              jq '.valid')" != true ]; do sleep 10; done
+          readarray -t notes < <(yq ".releases[] |
+            select (.version == \"$(jq --raw-output '.version' extension/manifest.json)\").notes |
+            .[]" \
+            ${{ env.changelog_definition }})
+          curl \
+            --request POST \
+            --header 'Content-Type: application/json' \
+            --header "Authorization: JWT ${{ env.jwt_token }}" \
+            --data "{\"release_notes\":{\"en-US\":\"$((echo -e "<ul>\n$(for note in "${notes[@]}"; \
+              do echo "<li>${note}</li>"; done)\n</ul>") |
+              sed --null-data 's|\n|\\n|g')\"},\"upload\":\"${upload_uuid}\"}" \
+            --url "${{ env.addons_api_url }}addons/addon/${{ env.extension_name }}/versions/"
       - name: Create GitHub release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          readarray -t notes < <(yq ".releases[] | select (.version == \"$(jq --raw-output '.version' extension/manifest.json)\").notes | .[]" ${{ env.changelog_definition }})
-          gh release create --notes "$(for note in "${notes[@]}"; do echo "* ${note}"; done)" --title "$(jq --raw-output '.name' extension/manifest.json) $(jq --raw-output '.version' extension/manifest.json)" "v$(jq --raw-output '.version' extension/manifest.json)"
+          readarray -t notes < <(yq ".releases[] |
+            select (.version == \"$(jq --raw-output '.version' extension/manifest.json)\").notes |
+            .[]" \
+            ${{ env.changelog_definition }})
+          gh release create \
+            "v$(jq --raw-output '.version' extension/manifest.json)" \
+            --notes "$(for note in "${notes[@]}"; do echo "* ${note}"; done)" \
+            --title "$(jq --raw-output '.name' extension/manifest.json) \
+              $(jq --raw-output '.version' extension/manifest.json)"

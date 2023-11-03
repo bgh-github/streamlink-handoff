@@ -19,20 +19,35 @@ jobs:
           sudo apt-get install html-xml-utils
       - name: Collate supported URLs from Streamlink documentation
         run: |
-          readarray -t plugin_urls < <(curl --silent https://streamlink.github.io/plugins.html | hxnormalize | hxclean | hxselect -c '#plugins section dl dd.field-even:nth-of-type(2) ul li p' | grep '\S' | tr --delete " ")
-          readarray -t plugin_urls < <(printf "\"*://*.%s/*\"\n" "${plugin_urls[@]}")
-          echo "documented_urls=$(IFS=,; echo "${plugin_urls[*]}" | sed --expression='s/,/, /g')" >> $GITHUB_ENV
+          readarray -t plugin_urls < <(curl --silent --url https://streamlink.github.io/plugins.html |
+            hxnormalize |
+            hxclean |
+            hxselect -c '#plugins section dl dd.field-even:nth-of-type(2) ul li p' |
+            grep '\S' |
+            tr --delete ' ')
+          readarray -t plugin_urls < <(printf '"*://*.%s/*"\n' "${plugin_urls[@]}")
+          echo "documented_urls=$(IFS=,; echo "${plugin_urls[*]}" |
+            sed --expression='s|,|, |g')" \
+            >> $GITHUB_ENV
       - name: Extract current extension URL list
-        run: echo "extension_urls=$(grep --perl-regexp --only-matching 'const streamlinkPluginUrls = \[\K[^\]]*' extension/background.js)" >> $GITHUB_ENV
+        run: echo "extension_urls=$(grep \
+          --perl-regexp \
+          --only-matching \
+          'const streamlinkPluginUrls = \[\K[^\]]*' extension/background.js)" \
+          >> $GITHUB_ENV
       - name: Create pull request for updating list if required
         if:  env.extension_urls != env.documented_urls
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           git switch --create github-actions/plugin-urls
-          sed --in-place --regexp-extended --expression='s@const streamlinkPluginUrls = \[(.*)\]@const streamlinkPluginUrls = [${{ env.documented_urls }}]@' extension/background.js
+          sed \
+            --in-place \
+            --regexp-extended \
+            --expression='s|\(const streamlinkPluginUrls = \)\[(.*)\]|\1[${{ env.documented_urls }}]|' \
+            extension/background.js
           git config user.name github-actions
           git config user.email github-actions@github.com
-          git commit --all --message="Sync Streamlink plugin URLs"
+          git commit --all --message='Sync Streamlink plugin URLs'
           git push --set-upstream origin github-actions/plugin-urls
           gh pr create --fill
