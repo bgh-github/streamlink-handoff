@@ -1,4 +1,9 @@
 releases:
+  - version: "2.0.0"
+    date: 2023-11-05
+    notes:
+      - Migrate to Manifest V3
+      - Display context menu for matching `page` and `tab` contexts, not just links
   - version: "1.1.6"
     date: 2023-11-03
     notes:

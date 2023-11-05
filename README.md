@@ -25,7 +25,7 @@ Streamlink Handoff respects your privacy and does not collect any data.
 <br/>
 
 > [!NOTE]
-> The context menu includes three main items
+> The context menu includes three main items. As of Streamlink Handoff v2, these entries will display for matching links, as well as pages and tabs
 > * Standard 'Livestream' Streamlink behaviour
 > * [Seekable-friendly](https://github.com/streamlink/streamlink/issues/134) 'VOD (Passthrough)' where the player handles stream transport
 > * The 'Copy Command' item allows copying the full Streamlink command line string to the clipboard for either of the above, _without_ launching the stream
@@ -194,7 +194,7 @@ Review [requirements](#requirements). Though not specifically mentioned, it's as
 * On Linux/(macOS?) - core utilities, namely `od` and `xxd`
 * On Windows - tested against Windows PowerShell 5.1 ([installed by default](https://learn.microsoft.com/powershell/scripting/windows-powershell/install/windows-powershell-system-requirements#windows-powershell-51) on Windows 10+)
 
-To avoid unnecessary context menu clutter, the Streamlink Handoff entry is set to display only for hyperlinks matching URLs sourced from Streamlink's [plugins article](https://streamlink.github.io/plugins.html). An example link that can be used for testing is below:
+To avoid unnecessary context menu clutter, the Streamlink Handoff entry is set to display only in link, (open) page and tab [contexts](https://developer.mozilla.org/docs/Mozilla/Add-ons/WebExtensions/API/menus/ContextType) that match URLs sourced from Streamlink's [plugins article](https://streamlink.github.io/plugins.html). An example link that can be used for testing is below:
 
 <https://www.twitch.tv/monstercat>
 
@@ -227,7 +227,6 @@ As a novice programmer at best, I am open to suggestions.
 ## Future Plans
 
 * Improve native messaging response and error handling/logging
-* Manifest V3
 * Twitch [client integrity check](https://github.com/streamlink/streamlink/issues/5370) compatibility (if required)
 
 ## Shout-out
