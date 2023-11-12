@@ -1,4 +1,8 @@
 releases:
+  - version: "2.0.1"
+    date: 2023-11-12
+    notes:
+      - Initialise the context menu in more circumstances
   - version: "2.0.0"
     date: 2023-11-05
     notes:
