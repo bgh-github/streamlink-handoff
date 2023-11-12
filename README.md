@@ -227,6 +227,10 @@ As a novice programmer at best, I am open to suggestions.
 ## Future Plans
 
 * Improve native messaging response and error handling/logging
+* Revisit handling of context menu creation  
+  [Related discussion + links](https://discourse.mozilla.org/t/strange-mv3-behaviour-browser-runtime-oninstalled-event-and-menus-create/111208)  
+  [Pending enhancement to extension install experience](https://bugzilla.mozilla.org/show_bug.cgi?id=1842832)  
+  [Pending new event functionality](https://github.com/w3c/webextensions/issues/353)
 * Twitch [client integrity check](https://github.com/streamlink/streamlink/issues/5370) compatibility (if required)
 
 ## Shout-out
