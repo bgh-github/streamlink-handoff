@@ -196,15 +196,15 @@ Review [requirements](#requirements). Though not specifically mentioned, it's as
 
 To avoid unnecessary context menu clutter, the Streamlink Handoff entry is set to display only in link, (open) page and tab [contexts](https://developer.mozilla.org/docs/Mozilla/Add-ons/WebExtensions/API/menus/ContextType) that match URLs sourced from Streamlink's [plugins article](https://streamlink.github.io/plugins.html). An example link that can be used for testing is below:
 
-<https://www.twitch.tv/monstercat>
+<https://www.twitch.tv/nocopyrightsounds>
 
 [![Sync plugin URLs](../../actions/workflows/sync-plugin-urls.yml/badge.svg)](../../actions/workflows/sync-plugin-urls.yml)
 
 If Firefox is open in Private Browsing mode, Streamlink Handoff must be [allowed to run in Private Windows](https://support.mozilla.org/kb/extensions-private-browsing).
 
-If Streamlink was only just installed prior, Firefox may need to be closed/reopened to reflect updated PATH. If in doubt, reboot.
+If Streamlink was only just installed prior, Firefox may need to be closed/reopened to reflect updated PATH. If in doubt, try rebooting.
 
-In cases where the context menu appears but videos won't load, an initial troubleshooting step should be to check that Streamlink can successfully launch a video from the command line independent of Streamlink Handoff. Test using a basic command like `streamlink twitch.tv/monstercat best`, or use the 'Copy Command' option to copy the Streamlink command line string to the clipboard. Any issues when running direct from the command line should be addressed before retrying the extension.
+In cases where the context menu appears but videos won't load, an initial troubleshooting step should be to check that Streamlink can successfully launch a video from the command line independent of Streamlink Handoff. Test using a basic command like `streamlink twitch.tv/nocopyrightsounds best`, or use the 'Copy Command' option to copy the Streamlink command line string to the clipboard. Any issues when running direct from the command line should be addressed before retrying the extension.
 
 You can also try rerunning the first-time [native messaging host setup](#first-time-setup) for your platform to reapply the latest recommended host configuration.
 
