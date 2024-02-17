@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Streamlink Handoff",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Pass video URLs to Streamlink for playback",
   "icons": {"48": "icon.svg", "96": "icon.svg"},
   "background": {"scripts": ["background.js"]},
