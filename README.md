@@ -237,4 +237,4 @@ As a novice programmer at best, I am open to suggestions.
 
 None of this would be possible without the [Streamlink project](https://github.com/streamlink/streamlink)
 
-Extension icon created from a mashup of [Twemoji](https://twemoji.twitter.com) ["raised hand"](https://github.com/twitter/twemoji/blob/master/assets/svg/270b.svg) emoji image and the [Streamlink icon](https://github.com/streamlink/streamlink/blob/master/icon.svg)
+Extension icon created from a mashup of [Twemoji "raised hand"](https://github.com/twitter/twemoji/blob/master/assets/svg/270b.svg) emoji image and the [Streamlink icon](https://github.com/streamlink/streamlink/blob/master/icon.svg)
