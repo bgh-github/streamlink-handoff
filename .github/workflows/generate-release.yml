@@ -55,8 +55,7 @@ jobs:
             --request POST \
             --header 'Content-Type: application/json' \
             --header "Authorization: JWT ${{ env.jwt_token }}" \
-            --data "{\"release_notes\":{\"en-US\":\"$((echo -e "<ul>\n$(for note in "${notes[@]}"; \
-              do echo "<li>${note}</li>"; done)\n</ul>") |
+            --data "{\"release_notes\":{\"en-US\":\"$((for note in "${notes[@]}"; do echo "* ${note}"; done) |
               sed --null-data 's|\n|\\n|g')\"},\"upload\":\"${upload_uuid}\"}" \
             --url "${{ env.addons_api_url }}addons/addon/${{ env.extension_name }}/versions/"
       - name: Create GitHub release
