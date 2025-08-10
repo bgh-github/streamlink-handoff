@@ -110,19 +110,15 @@ If curious, you're encouraged to inspect commands before running them.
 </details>
 
 <details>
-  <summary>Linux - AUR Package</summary>
+  <summary>Linux - AUR</summary>
 
-  Users of Arch-based distros with access to the Arch User Repository (AUR) can install the [streamlink-handoff-host](https://aur.archlinux.org/packages/streamlink-handoff-host) AUR package.
+  Users of Arch Linux-based distros with access to the Arch User Repository (AUR) can install using the [streamlink-handoff-host](https://aur.archlinux.org/packages/streamlink-handoff-host) package build.
 
   ```shell
-  # using makepkg
   pkgname=streamlink-handoff-host
   git clone "https://aur.archlinux.org/${pkgname}.git"
-  cd "${pkgname}" || exit
+  cd "${pkgname}"
   makepkg --install --syncdeps
-
-  # aur helper example
-  <paru|yay> --sync streamlink-handoff-host
   ```
 
   Note: in line with [packaging guidelines](https://wiki.archlinux.org/title/Arch_package_guidelines#Directories), the necessary two Streamlink Handoff files are installed to `/usr/lib/mozilla/native-messaging-hosts` as a system-based location. Thus making the native messaging host available to execute for all users
