@@ -1,4 +1,9 @@
 releases:
+  - version: "2.0.5"
+    date: 2026-04-18
+    notes:
+      - Sync Streamlink plugin URLs with latest release
+      - Defer options page dark mode themeing to browser
   - version: "2.0.4"
     date: 2025-02-15
     notes:
