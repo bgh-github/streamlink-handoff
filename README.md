@@ -1,3 +1,6 @@
+> [!WARNING]
+> This repository has moved. Its new home is https://git.bgh.io/bgh/streamlink-handoff
+
 # Streamlink Handoff
 
 <img src="/extension/icon.svg" width="100%" height="130">
